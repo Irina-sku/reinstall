@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# - put this script in your /var/www/ and chmod it to 755 (sudo chmod 755 -R vhost)
+# - keep the accompaying folder in your /var/www/ directory
+#
+# use:	- for a normal project: in /var/www run sudo ./vhost myProjectName
+#	- for symfony in /var/www/ run sudo .vhost myProjectName symf
+
+NAME=$1
+
+
+sed -i "2i 127.0.0.1	$NAME.local" /etc/hosts
+
+if [[ $2 == "" ]]
+	then cp /var/www/config/000-default.conf /etc/apache2/sites-available/$NAME.local.conf
+	sed -i "s/projectname/$NAME/g" /etc/apache2/sites-available/$NAME.local.conf
+elif [[ $2 == "symf" ]]
+	then cp /var/www/config/001-symfDefault.conf /etc/apache2/sites-available/$NAME.local.conf
+	sed -i "s/projectname/$NAME/g" /etc/apache2/sites-available/$NAME.local.conf
+fi
+
+a2ensite $NAME.local
+systemctl reload apache2
