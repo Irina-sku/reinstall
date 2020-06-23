@@ -13,3 +13,6 @@
   <li> for a normal project: in /var/www run sudo ./vhost myProjectName </li>
   <li> for symfony in /var/www/ run sudo .vhost myProjectName symf </li>
 </ul>
+<link>
+
+Thanks for collab [Steve](https://github.com/xenoxinius)!
